@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/go-fiber-clean-architecture/mongo"
+	"github.com/sprite5641/go-fiber-clean-architecture/mongo"
 )
 
 func NewMongoDatabase(env *Env) mongo.Client {
@@ -18,10 +18,11 @@ func NewMongoDatabase(env *Env) mongo.Client {
 	dbUser := env.DBUser
 	dbPass := env.DBPass
 
-	mongodbURI := fmt.Sprintf("mongodb://%s:%s@%s:%s", dbUser, dbPass, dbHost, dbPort)
+	println("dbPort", dbPort)
+	mongodbURI := fmt.Sprintf("mongodb+srv://%s:%s@%s.nfn7pei.mongodb.net/?retryWrites=true&w=majority", dbUser, dbPass, dbHost)
 
 	if dbUser == "" || dbPass == "" {
-		mongodbURI = fmt.Sprintf("mongodb://%s:%s", dbHost, dbPort)
+		mongodbURI = fmt.Sprintf("mongodb+srv://%s:%s@%s.nfn7pei.mongodb.net/?retryWrites=true&w=majority", dbUser, dbPass, dbHost)
 	}
 
 	client, err := mongo.NewClient(mongodbURI)
